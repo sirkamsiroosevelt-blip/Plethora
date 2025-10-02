@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plethora Web Dev Course</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+    }
+
+    /* Starry Sky Background */
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+      z-index: -2;
+    }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 3s infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
+    }
+    .shooting-star {
+      position: absolute;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, white, rgba(255,255,255,0));
+      opacity: 0.8;
+      animation: shoot 5s linear infinite;
+    }
+    @keyframes shoot {
+      0% {transform: translateX(-200px) translateY(0); opacity: 1;}
+      100% {transform: translateX(120vw) translateY(100vh); opacity: 0;}
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 40px 20px;
+      position: relative;
+    }
+
+    /* Logo blending with sky */
+    header img {
+      width: 180px;
+      z-index: 2;
+      background: none;
+      border: none;
+      filter: brightness(0.9) contrast(1.1);
+      mix-blend-mode: screen; /* blends into sky */
+      opacity: 0.9;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-top: 20px;
+      color: #fff;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #ddd;
+    }
+
+    .cta-buttons {
+      margin-top: 20px;
+    }
+
+    .cta-buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 25px;
+      color: #fff;
+      text-decoration: none;
+      background: #25D366;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .cta-buttons a:hover {
+      background: #1da851;
+    }
+
+    .cta-buttons .form-btn {
+      background: #007bff;
+    }
+    .cta-buttons .form-btn:hover {
+      background: #0056b3;
+    }
+
+    section {
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .learn-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .learn-item {
+      width: 150px;
+    }
+
+    .learn-item i {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .fa-html5 {color: #e34c26;}
+    .fa-css3-alt {color: #1572B6;}
+    .fa-js {color: #f7df1e;}
+    .fa-react {color: #61DBFB;}
+    .fa-database {color: #ff9900;}
+
+    .values, .success-stories {
+      background: rgba(0,0,0,0.7);
+      padding: 60px 20px;
+      margin-top: 40px;
+      border-radius: 8px;
+    }
+
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .learn-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Carousel Styles */
+    .carousel-container {
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      margin: 30px auto;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-card {
+      min-width: 100%;
+      box-sizing: border-box;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      text-align: center;
+      padding: 20px 15px;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .carousel-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      border: 2px solid #25D366;
+    }
+
+    .carousel-card h3 {
+      margin: 8px 0 5px;
+      font-size: 1.1rem;
+    }
+
+    .carousel-card p {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #ddd;
+      line-height: 1.3;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      padding: 5px 12px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+      transition: background 0.3s;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+
+    @media (max-width: 600px) {
+      .carousel-card img { width: 70px; height: 70px; }
+      .carousel-card h3 { font-size: 1rem; }
+      .carousel-card p { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars">
+    <div class="star" style="top:10%;left:20%"></div>
+    <div class="star" style="top:30%;left:50%"></div>
+    <div class="star" style="top:70%;left:80%"></div>
+    <div class="star" style="top:60%;left:10%"></div>
+    <div class="star" style="top:40%;left:90%"></div>
+    <div class="shooting-star" style="top:15%;left:-50px;"></div>
+  </div>
+
+  <header>
+    <img src="images/logo.jpg" alt="Plethora Logo">
+    <h1>Plethora Web Development Course</h1>
+    <p>Learn the skills to build modern websites & apps with industry experts.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/2348160701726" target="_blank"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+      <a href="https://forms.gle/wkRMGBVcSq9RBu3N7" target="_blank" class="form-btn">Register Now</a>
+    </div>
+  </header>
+
+  <section class="learn">
+    <h2>What You’ll Learn</h2>
+    <div class="learn-grid">
+      <div class="learn-item">
+        <i class="fab fa-html5"></i>
+        <p>HTML5</p>
+      </div>
+      <div class="learn-item">
+        <i class="fab fa-css3-alt"></i>
+        <p>CSS3</p>
+      </div>
+      <div class="learn-item">
+        <i class="fab fa-js"></i>
+        <p>JavaScript</p>
+      </div>
+      <div class="learn-item">
+        <i class="fab fa-react"></i>
+        <p>React JS</p>
+      </div>
+      <div class="learn-item">
+        <i class="fas fa-database"></i>
+        <p>Databases</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="values">
+    <h2>Why Choose Plethora?</h2>
+    <p>We provide real-world projects, mentorship, and step-by-step training to help you launch your career.</p>
+  </section>
+
+  <!-- Carousel Testimonials -->
+  <section class="testimonials">
+    <h2>What Our Students Say</h2>
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <div class="carousel-card">
+          <img src="images/1.jpg" alt="Emeka O.">
+          <h3>Emeka O.</h3>
+          <p>"I never thought I could learn web development so fast. Highly recommended!"</p>
+        </div>
+        <div class="carousel-card">
+          <img src="images/2.jpg" alt="David K.">
+          <h3>David K.</h3>
+          <p>"The projects helped me land my first client. Amazing experience!"</p>
+        </div>
+        <div class="carousel-card">
+          <img src="images/3.jpg" alt="Chinedu N.">
+          <h3>Chinedu N.</h3>
+          <p>"The mentors are very patient and explain everything step by step."</p>
+        </div>
+        <div class="carousel-card">
+          <img src="images/4.jpg" alt="Aisha B.">
+          <h3>Aisha B.</h3>
+          <p>"I feel confident building real web apps now. Thank you Plethora!"</p>
+        </div>
+        <div class="carousel-card">
+          <img src="images/5.jpg" alt="Fatima Y.">
+          <h3>Fatima Y.</h3>
+          <p>"The mentorship program is truly life-changing. 5 stars!"</p>
+        </div>
+      </div>
+      <button class="carousel-btn prev">&#10094;</button>
+      <button class="carousel-btn next">&#10095;</button>
+    </div>
+  </section>
+
+  <section class="success-stories">
+    <h2>Student Success Stories</h2>
+    <div class="card">
+      <p>John built an eCommerce site and earned his first $500 online!</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Plethora. All rights reserved.
+  </footer>
+
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    let currentIndex = 0;
+
+    function moveToSlide(index) {
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    }
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      moveToSlide(currentIndex);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      moveToSlide(currentIndex);
+    });
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      moveToSlide(currentIndex);
+    }, 5000);
+  </script>
+</body>
+</html>
