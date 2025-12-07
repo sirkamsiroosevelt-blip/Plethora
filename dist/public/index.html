@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ionic Bonds Module</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-BpEbeuHR.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CyB7YRIa.css">
+</head>
+<body>
+
+    <header>
+        <h1>Ionic Bonds Module</h1>
+        <div class="header-actions">
+            <button class="btn" id="themeBtn" onclick="toggleTheme()">☀️</button>
+            <div class="admin-controls">
+                <div id="adminTools" style="display:none; gap:10px;">
+                    <button class="btn btn-primary" onclick="addTopic()">+ Add Topic</button>
+                    <button class="btn" onclick="duplicatePage()">Duplicate Page</button>
+                </div>
+                <button class="btn" id="adminBtn" onclick="toggleAdmin()">Admin Login</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="progress-container">
+        <div class="progress-label">
+            <span>Module Progress</span>
+            <span id="progressText">0% Complete</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <main>
+        <div class="topic-grid" id="topicGrid">
+            <!-- Cards rendered via JS -->
+        </div>
+    </main>
+
+</body>
+</html>
